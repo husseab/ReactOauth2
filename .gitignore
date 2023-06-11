@@ -18,6 +18,7 @@
 .env.test.local
 .env.production.local
 api/keys.js
+api/node_modules
 src/keys.js
 
 npm-debug.log*
