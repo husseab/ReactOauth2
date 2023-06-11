@@ -1,30 +1,30 @@
 const express = require('express');
 const cors = require('cors');
-// const jwt = require('express-jwt')
-// const jwks = require('jwks')
-const axios = require('axios')
-const { auth } = require('express-oauth2-jwt-bearer');
-const {baseURL} = require('./keys')
-const {audience_id} = require('./keys')
+const { auth } = require('express-openid-connect');
+const {baseURL, clientId, secret, myBaseURL} = require('./keys')
 
 const app = express();
 app.use(cors());
 
-const jwtCheck = auth({
-    audience: audience_id,
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    baseURL: myBaseURL,
+    clientID: clientId,
     issuerBaseURL: baseURL,
-    tokenSigningAlg: 'RS256'
-  })
-  console.log("baseURL", "audience_id", baseURL, audience_id)
-  // enforce on all endpoints
-  app.use(jwtCheck);
+    secret: secret
+}
+
+app.use(auth(config))
 
 app.get('/', (req,res) => {
     res.send('Hello from index route');
 });
 
-app.get('/protected', (req,res) => {
-    res.send(req.user);
+app.get('/protected', async (req,res) => {
+
+    res.send('Hello from protected route');
+
 });
 
 app.use((req, res, next) => {
