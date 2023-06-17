@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { auth } = require('express-openid-connect');
-const {baseURL, clientId, secret, myBaseURL} = require('./keys')
+require('dotenv').config()
 
 const app = express();
 app.use(cors());
@@ -9,10 +9,10 @@ app.use(cors());
 const config = {
     authRequired: false,
     auth0Logout: true,
-    baseURL: myBaseURL,
-    clientID: clientId,
-    issuerBaseURL: baseURL,
-    secret: secret
+    baseURL: process.env.myBaseURL,
+    clientID: process.env.clientId,
+    issuerBaseURL: process.env.baseURL,
+    secret: process.env.secret
 }
 
 app.use(auth(config))

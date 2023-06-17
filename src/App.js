@@ -10,7 +10,7 @@ function App() {
     isAuthenticated,
     getAccessTokenSilently
   } = useAuth0();
-
+  
   function callAPI() {
     axios.get("http://localhost:4000/")
     .then(response => console.log("res.data", response.data))

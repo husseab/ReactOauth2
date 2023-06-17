@@ -17,7 +17,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
-api/keys.js
+.env
+api/.env
 api/node_modules
 src/keys.js
 
